@@ -3,6 +3,7 @@ import ColorBox from './ColorBox'
 import './Palette.css'
 
 import Navbar from './Navbar'
+import { ColorizeTwoTone } from '@material-ui/icons'
 
 export default class Palette extends Component {
   constructor(props) {
@@ -19,10 +20,15 @@ export default class Palette extends Component {
     this.setState({ format: val })
   }
   render() {
-    const { colors, paletteName, emoji } = this.props.palette
+    const { colors, paletteName: name, emoji, id } = this.props.palette
     const { level, format } = this.state
     const colorBoxes = colors[level].map((color) => (
-      <ColorBox background={color[format]} name={color.name} key={color.id} />
+      <ColorBox
+        background={color[format]}
+        name={color.name}
+        key={color.id}
+        moreUrl={`/palette/${id}/${color.id}`}
+      />
     ))
     return (
       <div className='Palette'>
@@ -33,7 +39,7 @@ export default class Palette extends Component {
         />
         <div className='Palette-colors'>{colorBoxes}</div>
         <footer className='Palette-footer'>
-          {paletteName}
+          {name}
           <span className='emoji'>{emoji}</span>
         </footer>
       </div>
