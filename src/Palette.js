@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ColorBox from './ColorBox'
-import './Palette.css'
 
 import Navbar from './Navbar'
-import { ColorizeTwoTone } from '@material-ui/icons'
+import PaletteFooter from './PaletteFooter'
 
+import './Palette.css'
 export default class Palette extends Component {
   constructor(props) {
     super(props)
@@ -20,7 +20,7 @@ export default class Palette extends Component {
     this.setState({ format: val })
   }
   render() {
-    const { colors, paletteName: name, emoji, id } = this.props.palette
+    const { colors, paletteName, emoji, id } = this.props.palette
     const { level, format } = this.state
     const colorBoxes = colors[level].map((color) => (
       <ColorBox
@@ -37,12 +37,10 @@ export default class Palette extends Component {
           level={level}
           changeLevel={this.changeLevel}
           changeFormat={this.changeFormat}
+          showingAllColors
         />
         <div className='Palette-colors'>{colorBoxes}</div>
-        <footer className='Palette-footer'>
-          {name}
-          <span className='emoji'>{emoji}</span>
-        </footer>
+        <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     )
   }
