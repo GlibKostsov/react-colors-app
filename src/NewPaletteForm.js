@@ -18,6 +18,7 @@ import { arrayMove } from 'react-sortable-hoc'
 //Local Components
 import DraggableColorList from './DraggableColorList'
 import PaletteFormNav from './PaletteFormNav'
+import ColorPickerForm from './ColorPickerForm'
 
 const drawerWidth = 400
 
@@ -88,27 +89,15 @@ class NewPaletteForm extends Component {
     super(props)
     this.state = {
       open: true,
-      currentColor: 'green',
-      newColorName: '',
       colors: this.props.palettes[0].colors,
     }
-    this.updateCurrentColor = this.updateCurrentColor.bind(this)
+
     this.addNewColor = this.addNewColor.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.removeColor = this.removeColor.bind(this)
     this.clearColors = this.clearColors.bind(this)
     this.addRandomColor = this.addRandomColor.bind(this)
-  }
-  componentDidMount() {
-    ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
-      this.state.colors.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      )
-    )
-    ValidatorForm.addValidationRule('isColorUnique', (value) =>
-      this.state.colors.every(({ color }) => color !== this.state.currentColor)
-    )
   }
 
   handleDrawerOpen = () => {
@@ -119,26 +108,6 @@ class NewPaletteForm extends Component {
     this.setState({ open: false })
   }
 
-  updateCurrentColor(newColor) {
-    this.setState({ currentColor: newColor.hex })
-  }
-
-  addNewColor() {
-    const newColor = {
-      color: this.state.currentColor,
-      name: this.state.newColorName,
-    }
-
-    this.setState({
-      colors: [...this.state.colors, newColor],
-      newColorName: '',
-      currentColor: '#359E73',
-    })
-  }
-
-  handleChange(evt) {
-    this.setState({ [evt.target.name]: evt.target.value })
-  }
   handleSubmit(newPaletteName) {
     const newPalette = {
       paletteName: newPaletteName,
@@ -149,6 +118,12 @@ class NewPaletteForm extends Component {
     this.props.history.push('/')
   }
 
+  addNewColor(newColor) {
+    this.setState({
+      colors: [...this.state.colors, newColor],
+      newColorName: '',
+    })
+  }
   removeColor(colorName) {
     this.setState({
       colors: this.state.colors.filter((color) => color.name !== colorName),
@@ -209,7 +184,7 @@ class NewPaletteForm extends Component {
                 color='secondary'
                 onClick={this.clearColors}
               >
-                Clear Palette Button
+                Clear Palette
               </Button>
               <Button
                 variant='contained'
@@ -220,37 +195,11 @@ class NewPaletteForm extends Component {
                 Random Color
               </Button>
             </div>
-
-            <ChromePicker
-              color={this.state.currentColor}
-              onChangeComplete={this.updateCurrentColor}
+            <ColorPickerForm
+              paletteIsFull={paletteIsFull}
+              addNewColor={this.addNewColor}
+              colors={colors}
             />
-            <ValidatorForm onSubmit={this.addNewColor}>
-              <TextValidator
-                value={this.state.newColorName}
-                name='newColorName'
-                onChange={this.handleChange}
-                validators={['required', 'isColorUnique', 'isColorNameUnique']}
-                errorMessages={[
-                  'Enter a color name',
-                  'Color already used!',
-                  'Color name must be unique!',
-                ]}
-              />
-              <Button
-                variant='contained'
-                type='submit'
-                color='primary'
-                disabled={paletteIsFull}
-                style={{
-                  backgroundColor: paletteIsFull
-                    ? 'rgba(0, 0, 0, 0.12)'
-                    : this.state.currentColor,
-                }}
-              >
-                {paletteIsFull ? 'Palette Full' : 'Add Colors'}
-              </Button>
-            </ValidatorForm>
           </Drawer>
           <main
             className={classNames(classes.content, {
