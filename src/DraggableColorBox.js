@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+//Material UI Styling
 import { withStyles } from '@material-ui/styles'
 import DeleteIcon from '@material-ui/icons/Delete'
+//Box Drag & Drop
+import { SortableElement } from 'react-sortable-hoc'
 
 const styles = {
   root: {
@@ -33,22 +36,17 @@ const styles = {
     transition: 'all 0.3s ease-in-out',
   },
 }
-class DraggableColorBox extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    const { color, name, classes, handleClick } = this.props
-    return (
-      <div style={{ backgroundColor: color }} className={classes.root}>
-        <div className={classes.boxContent}>
-          <span>{name}</span>
-          <DeleteIcon className={classes.deleteIcon} onClick={handleClick} />
-        </div>
-        {name}
+const DraggableColorBox = SortableElement((props) => {
+  const { color, name, classes, handleClick } = props
+  return (
+    <div style={{ backgroundColor: color }} className={classes.root}>
+      <div className={classes.boxContent}>
+        <span>{name}</span>
+        <DeleteIcon className={classes.deleteIcon} onClick={handleClick} />
       </div>
-    )
-  }
-}
+      {name}
+    </div>
+  )
+})
 
 export default withStyles(styles)(DraggableColorBox)

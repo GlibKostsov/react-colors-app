@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+//Material UI Styling
 import { withStyles } from '@material-ui/core/styles'
-//Drawer Component
+//Material UI Drawer Component
 import classNames from 'classnames'
 import Drawer from '@material-ui/core/Drawer'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -14,9 +15,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Button from '@material-ui/core/Button'
 //Color Picker Component
 import { ChromePicker } from 'react-color'
-
-import DraggableColorBox from './DraggableColorBox'
+//Form Validator Component
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
+//Box Drag & Drop
+import { arrayMove } from 'react-sortable-hoc'
+//Local Components
+import DraggableColorList from './DraggableColorList'
 
 const drawerWidth = 400
 
@@ -92,6 +96,7 @@ class NewPaletteForm extends Component {
     this.addNewColor = this.addNewColor.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.removeColor = this.removeColor.bind(this)
   }
   componentDidMount() {
     ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
@@ -152,6 +157,12 @@ class NewPaletteForm extends Component {
     this.setState({
       colors: this.state.colors.filter((color) => color.name !== colorName),
     })
+  }
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex),
+    }))
   }
 
   render() {
@@ -255,15 +266,12 @@ class NewPaletteForm extends Component {
             })}
           >
             <div className={classes.drawerHeader} />
-
-            {this.state.colors.map((color) => (
-              <DraggableColorBox
-                key={color.name}
-                color={color.color}
-                name={color.name}
-                handleClick={() => this.removeColor(color.name)}
-              />
-            ))}
+            <DraggableColorList
+              colors={this.state.colors}
+              removeColor={this.removeColor}
+              axis='xy'
+              onSortEnd={this.onSortEnd}
+            />
           </main>
         </div>
       </>
