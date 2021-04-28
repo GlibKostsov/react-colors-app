@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+//Material UI Styling
 import { withStyles } from '@material-ui/core'
 //Select Component
 import Select from '@material-ui/core/Select'
@@ -10,9 +11,9 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 //Slider Component
 import Slider from 'rc-slider'
-//Styles
-import styles from './styles/NavbarStyles'
 import 'rc-slider/assets/index.css'
+//Local Components & Styles
+import styles from './styles/NavbarStyles'
 
 class Navbar extends Component {
   constructor(props) {

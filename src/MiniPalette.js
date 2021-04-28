@@ -1,6 +1,6 @@
 import React from 'react'
 import { withStyles } from '@material-ui/styles'
-//Styles
+//Local Components & Styles
 import styles from './styles/MiniPaletteStyles'
 
 function MiniPalette(props) {

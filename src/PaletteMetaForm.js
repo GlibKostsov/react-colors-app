@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 //Material UI Validdator Form
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
-//EmojiMart emoji picker
+//Emoji Picker Component
 import { Picker } from 'emoji-mart'
 import 'emoji-mart/css/emoji-mart.css'
 

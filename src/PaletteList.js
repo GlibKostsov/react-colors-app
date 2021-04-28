@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 //Material UI Styling
 import { withStyles } from '@material-ui/core'
-//Local Components
+//Local Components & Styles
 import MiniPalette from './MiniPalette'
-//Local Styles
 import styles from './styles/PaletteListStyles'
 
 class PaletteList extends Component {
