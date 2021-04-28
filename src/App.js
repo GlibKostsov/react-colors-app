@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
+//Data Seed
 import seedColors from './seedColors'
 import { generatePalette } from './colorHelpers'
-//Components
+//Local Components
 import PaletteList from './PaletteList'
 import Palette from './Palette'
 import SingleColorPalette from './SingleColorPalette'
@@ -11,7 +12,8 @@ import NewPaletteForm from './NewPaletteForm'
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { palettes: seedColors }
+    const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'))
+    this.state = { palettes: savedPalettes || seedColors }
     this.savePalette = this.savePalette.bind(this)
     this.findPalette = this.findPalette.bind(this)
   }
@@ -19,7 +21,14 @@ export default class App extends Component {
     return this.state.palettes.find((palette) => palette.id === id)
   }
   savePalette(newPalette) {
-    this.setState({ palettes: [...this.state.palettes, newPalette] })
+    this.setState(
+      { palettes: [...this.state.palettes, newPalette] },
+      this.syncLocalStorage
+    )
+  }
+
+  syncLocalStorage() {
+    window.localStorage.setItem('palettes', JSON.stringify(this.state.palettes))
   }
 
   render() {
