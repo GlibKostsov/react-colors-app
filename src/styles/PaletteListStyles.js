@@ -1,6 +1,8 @@
 //Local Responsive Styles Helper
 import sizes from './sizes'
 
+import bg from './bg.svg'
+
 export default {
   root: {
     backgroundColor: 'blue',
@@ -8,6 +10,10 @@ export default {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    backgroundColor: '#527caa',
+    backgroundImage: `url(${bg})`,
+    /* background by SVGBackgrounds.com */
+    overflow: 'scroll',
   },
   container: {
     width: '60%',
@@ -32,6 +38,7 @@ export default {
       color: 'white',
     },
   },
+  heading: {},
   palettes: {
     boxSizing: 'border-box',
     width: '100%',
@@ -43,7 +50,7 @@ export default {
     },
     [sizes.down('xs')]: {
       gridTemplateColumns: 'repeat(1,100%)',
-      gridGap: '1rem',
+      gridGap: '1.4rem',
     },
   },
 }
