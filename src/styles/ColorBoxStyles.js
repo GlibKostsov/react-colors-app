@@ -1,6 +1,6 @@
 //Finds Color Lunminance
 import chroma from 'chroma-js'
-//Local Styles
+//Local Responsive Styles Helper
 import sizes from './sizes'
 
 export default {

@@ -1,3 +1,4 @@
+//Local Responsive Styles Helper
 import sizes from './sizes'
 
 export default {

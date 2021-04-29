@@ -1,3 +1,6 @@
+//Local Responsive Styles Helper
+import sizes from './sizes'
+
 const styles = {
   root: {
     width: '20%',
@@ -11,12 +14,23 @@ const styles = {
       color: 'white',
       transform: 'scale(1.1)',
     },
+    [sizes.down('lg')]: {
+      width: '25%',
+      height: '20%',
+    },
+    [sizes.down('md')]: {
+      width: '50%',
+      height: '10%',
+    },
+    [sizes.down('sm')]: {
+      width: '100%',
+      height: '5%',
+    },
   },
   boxContent: {
     position: 'absolute',
     width: '100%',
     padding: '10px',
-    left: '0px',
     bottom: '0px',
     color: 'rgba(0,0,0,0.5)',
     letterSpacing: '1px',
