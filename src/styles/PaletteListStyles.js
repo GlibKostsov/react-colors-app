@@ -5,10 +5,10 @@ import bg from './bg.svg'
 
 export default {
   '@global': {
-    'fade-exit': {
+    '.fade-exit': {
       opacity: 1,
     },
-    'fade-exit-active': {
+    '.fade-exit-active': {
       opacity: 0,
       transition: 'opacity 500ms ease-out',
     },
