@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 //Material UI Styling
 import { withStyles } from '@material-ui/styles'
 import DeleteIcon from '@material-ui/icons/Delete'
 //Box Drag & Drop
 import { SortableElement } from 'react-sortable-hoc'
-//Local Components & Styles
+//Local Styles
 import styles from './styles/DraggableColorBoxStyles'
 
 const DraggableColorBox = SortableElement((props) => {

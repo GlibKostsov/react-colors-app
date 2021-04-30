@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//Material UI Dialog Form
+//Material UI Styling
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -58,11 +58,11 @@ export default class PaletteMetaForm extends Component {
   }
 
   render() {
-    const { open, newPaletteName } = this.state
-    const { handleSubmit, hideForm } = this.props
+    const { newPaletteName, stage } = this.state
+    const { hideForm } = this.props
     return (
       <div>
-        <Dialog open={this.state.stage === 'emoji'}>
+        <Dialog open={stage === 'emoji'}>
           <DialogTitle id='form-dialog-title'>
             Choose a Palette Emojie
           </DialogTitle>
@@ -70,7 +70,7 @@ export default class PaletteMetaForm extends Component {
         </Dialog>
 
         <Dialog
-          open={this.state.stage === 'form'}
+          open={stage === 'form'}
           onClose={hideForm}
           aria-labelledby='form-dialog-title'
         >

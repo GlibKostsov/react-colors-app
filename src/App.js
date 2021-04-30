@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
+//Transitions
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 //Data Seed
 import seedColors from './seedColors'
 import { generatePalette } from './colorHelpers'
-//Transitions
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
 //Local Components
 import PaletteList from './PaletteList'
 import Palette from './Palette'
@@ -100,6 +100,17 @@ export default class App extends Component {
                         palette={generatePalette(
                           this.findPalette(routeProps.match.params.paletteId)
                         )}
+                      />
+                    </Page>
+                  )}
+                />
+                <Route
+                  render={(routeProps) => (
+                    <Page>
+                      <PaletteList
+                        {...routeProps}
+                        palettes={this.state.palettes}
+                        deletePalette={this.deletePalette}
                       />
                     </Page>
                   )}

@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 //Material UI Styling
-import { withStyles } from '@material-ui/core/styles'
-//Material UI Drawer Component
-import classNames from 'classnames'
 import Drawer from '@material-ui/core/Drawer'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Button from '@material-ui/core/Button'
+import { withStyles } from '@material-ui/core/styles'
+import classNames from 'classnames'
 //Box Drag & Drop
 import { arrayMove } from 'react-sortable-hoc'
+import seedColors from './seedColors'
 //Local Components & Styles
 import DraggableColorList from './DraggableColorList'
 import PaletteFormNav from './PaletteFormNav'
@@ -26,7 +26,7 @@ class NewPaletteForm extends Component {
     super(props)
     this.state = {
       open: true,
-      colors: this.props.palettes[0].colors,
+      colors: seedColors[0].colors,
     }
 
     this.addNewColor = this.addNewColor.bind(this)
@@ -69,9 +69,17 @@ class NewPaletteForm extends Component {
   }
 
   addRandomColor() {
-    const allColors = this.props.palettes.map((p) => p.colors).flat()
-    var rand = Math.floor(Math.random() * allColors.length)
-    const randomColor = allColors[rand]
+    const allColors = seedColors.map((palette) => palette.colors).flat()
+    let rand = Math.floor(Math.random() * allColors.length)
+    let randomColor = allColors[rand]
+    let isDuplicateColor = true
+    while (isDuplicateColor) {
+      let rand = Math.floor(Math.random() * allColors.length)
+      let randomColor = allColors[rand]
+      isDuplicateColor = this.state.colors.some(
+        (color) => color.name === randomColor.name
+      )
+    }
     this.setState({ colors: [...this.state.colors, randomColor] })
   }
 

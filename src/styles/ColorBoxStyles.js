@@ -1,4 +1,4 @@
-//Finds Color Lunminance
+//Finds Color Luminance
 import chroma from 'chroma-js'
 //Local Responsive Styles Helper
 import sizes from './sizes'
@@ -30,17 +30,21 @@ export default {
   },
   copyText: {
     color: (props) =>
-      chroma(props.background).luminance() >= 0.7 ? 'rgba(0,0,0,0.5)' : 'white',
+      chroma(props.background).luminance() >= 0.7
+        ? 'rgba(0,0,0,0.5)'
+        : 'rgba(255,255,255,0.8)',
   },
   colorName: {
     color: (props) =>
       chroma(props.background).luminance() <= 0.08
-        ? 'white'
+        ? 'rgba(255,255,255,0.8)'
         : 'rgba(0,0,0,0.5)',
   },
   seeMore: {
     color: (props) =>
-      chroma(props.background).luminance() >= 0.7 ? 'rgba(0,0,0,0.5)' : 'white',
+      chroma(props.background).luminance() >= 0.7
+        ? 'rgba(0,0,0,0.5)'
+        : 'rgba(255,255,255,0.8)',
     background: 'rgba(255, 255, 255, 0.3)',
     position: 'absolute',
     border: 'none',
@@ -54,7 +58,9 @@ export default {
   },
   copyButton: {
     color: (props) =>
-      chroma(props.background).luminance() >= 0.7 ? 'rgba(0,0,0,0.5)' : 'white',
+      chroma(props.background).luminance() >= 0.7
+        ? 'rgba(0,0,0,0.5)'
+        : 'rgba(255,255,255,0.8)',
     width: '100px',
     height: '30px',
     position: 'absolute',
